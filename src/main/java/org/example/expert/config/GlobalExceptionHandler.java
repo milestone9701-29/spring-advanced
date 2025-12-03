@@ -14,6 +14,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+
     @ExceptionHandler(InvalidRequestException.class)
     public ResponseEntity<Map<String, Object>> invalidRequestExceptionException(InvalidRequestException ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;

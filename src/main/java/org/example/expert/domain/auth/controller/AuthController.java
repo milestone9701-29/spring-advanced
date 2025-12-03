@@ -17,6 +17,7 @@ public class AuthController {
 
     private final AuthService authService;
 
+    // 1. 상태코드, JSON body를 스프링이 채워주는 구조라 되는 듯?
     @PostMapping("/auth/signup")
     public SignupResponse signup(@Valid @RequestBody SignupRequest signupRequest) {
         return authService.signup(signupRequest);

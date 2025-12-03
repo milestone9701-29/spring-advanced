@@ -13,6 +13,7 @@ public class FilterConfig {
     private final JwtUtil jwtUtil;
     private final ObjectMapper objectMapper;
 
+    // 1. 빈 등록 + 필터 등록을 따로 빼서 해놨네.
     @Bean
     public FilterRegistrationBean<JwtFilter> jwtFilter() {
         FilterRegistrationBean<JwtFilter> registrationBean = new FilterRegistrationBean<>();

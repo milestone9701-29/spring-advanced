@@ -31,7 +31,7 @@ public class JwtUtil {
     @PostConstruct
     public void init() {
         byte[] bytes = Base64.getDecoder().decode(secretKey);
-        key = Keys.hmacShaKeyFor(bytes);
+        key = Keys.hmacShaKeyFor(bytes); // 1. hmac256
     }
 
     public String createToken(Long userId, String email, UserRole userRole) {
@@ -39,10 +39,10 @@ public class JwtUtil {
 
         return BEARER_PREFIX +
                 Jwts.builder()
-                        .setSubject(String.valueOf(userId))
-                        .claim("email", email)
-                        .claim("userRole", userRole)
-                        .setExpiration(new Date(date.getTime() + TOKEN_TIME))
+                        .setSubject(String.valueOf(userId)) // 2. 인증 주체
+                        .claim("email", email) // 3. email
+                        .claim("userRole", userRole) // 4. Role
+                        .setExpiration(new Date(date.getTime() + TOKEN_TIME)) // 5. 만료일 설정 : access 용도니까 짧게 설정.
                         .setIssuedAt(date) // 발급일
                         .signWith(key, signatureAlgorithm) // 암호화 알고리즘
                         .compact();
@@ -57,7 +57,7 @@ public class JwtUtil {
 
     public Claims extractClaims(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(key)
+                .setSigningKey(key) // 5. 이거 뭐임? : verifyWith(key)로 검증이 아니네?
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
