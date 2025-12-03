@@ -30,7 +30,7 @@ public class JwtUtil {
 
     @PostConstruct
     public void init() {
-        byte[] bytes = Base64.getDecoder().decode(secretKey);
+        byte[] bytes = Base64.getDecoder().decode(secretKey); // 0. secretKey.getBytes(StandardCharsets.UTF_8); 또는 yml에 base64 인코딩 파일 넣기.
         key = Keys.hmacShaKeyFor(bytes); // 1. hmac256
     }
 

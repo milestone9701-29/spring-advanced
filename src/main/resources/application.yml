@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/schedule_db?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root # schedule
+    password: pass # s3cret!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create   # 개발 중: update, 제출 전: validate 권장 create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc.time_zone: Asia/Seoul
+  jackson:
+    time-zone: Asia/Seoul
+jwt:
+  secret:
+      key: "c2VjcmV0S2V5LmdldEJ5dGVzKFN0YW5kYXJkQ2hhcnNldHMuVVRGXzgpOyDrmJDripQgeW1s7JeQIGJhc2U2NCDsnbjsvZTrlKkg7YyM7J28IOuEo+q4sC4="
+logging:
+  level:
+    org.hibernate.SQL: debug
+server:
+  port: 8080
