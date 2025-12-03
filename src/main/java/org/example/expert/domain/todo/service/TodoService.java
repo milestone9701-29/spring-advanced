@@ -53,6 +53,7 @@ public class TodoService {
 
         Page<Todo> todos = todoRepository.findAllByOrderByModifiedAtDesc(pageable);
 
+        // 0. todos.map(TodoResponse::from); :: 정적 팩토리 메서드 추가해서 정리 거나 등등..
         return todos.map(todo -> new TodoResponse(
                 todo.getId(),
                 todo.getTitle(),
@@ -70,7 +71,10 @@ public class TodoService {
                 .orElseThrow(() -> new InvalidRequestException("Todo not found"));
 
         User user = todo.getUser();
-
+        // 1. 리팩토링. : ManyToOne 연관관계 잡고 그냥 todo.getUser().getId() - getEmail() 이런 식이 더 좋을 듯. : 마트료시카 인형같네.
+        // 2. 정보를 무엇을 들고 다닐 것인지, 어떠한 형태로 들고 갈 것인지 : 입력 - 출력에 따른 고민.
+        // 3. 입력 -> 함수 -> 출력 : 출력된 결과물이 같은 두 A, B에 어떠한 변형을 하든 출력 과정을 온전히 논리적으로 추론할 순 없다.
+        // 4. 입력 -> 박스 -> 출력 반복하면서 정보를 얻고 잃는 과정에 주목할 것.
         return new TodoResponse(
                 todo.getId(),
                 todo.getTitle(),

@@ -38,8 +38,8 @@ class ManagerServiceTest {
     @InjectMocks
     private ManagerService managerService;
 
-    @Test
-    public void manager_목록_조회_시_Todo가_없다면_NPE_에러를_던진다() {
+    @Test // 1. InvalidRequestException.class
+    public void manager_목록_조회_시_Todo가_없다면_IRE_에러를_던진다() {
         // given
         long todoId = 1L;
         given(todoRepository.findById(todoId)).willReturn(Optional.empty());
