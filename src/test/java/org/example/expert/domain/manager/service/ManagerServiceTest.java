@@ -24,6 +24,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,7 +62,7 @@ class ManagerServiceTest {
 
         ManagerSaveRequest managerSaveRequest = new ManagerSaveRequest(managerUserId);
 
-        given(todoRepository.findById(todoId)).willReturn(Optional.of(todo));
+        given(todoRepository.findById(anyLong())).willReturn(Optional.of(todo));
 
         // when & then
         InvalidRequestException exception = assertThrows(InvalidRequestException.class, () ->
