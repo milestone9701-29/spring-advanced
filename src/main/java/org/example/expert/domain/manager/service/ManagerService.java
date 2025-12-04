@@ -37,7 +37,7 @@ public class ManagerService {
 
         User todoUser=todo.getUser();
         // 1. todoUser==null 검사.
-        if (todoUser==null||!ObjectUtils.nullSafeEquals(user.getId(), todoUser.getId())) {
+        if (!ObjectUtils.nullSafeEquals(user.getId(), todoUser.getId())) {
             throw new InvalidRequestException("일정을 생성한 유저만 담당자를 지정할 수 있습니다.");
         }
 

@@ -41,6 +41,8 @@ class CommentServiceTest {
         CommentSaveRequest request = new CommentSaveRequest("contents");
         AuthUser authUser = new AuthUser(1L, "email", UserRole.USER);
 
+
+
         given(todoRepository.findById(anyLong())).willReturn(Optional.empty());
 
         // when : 1. Exception 불일치.
